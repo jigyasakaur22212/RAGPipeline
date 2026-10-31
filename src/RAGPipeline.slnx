@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Azure/Azure.csproj" Id="649d5b89-7155-4f83-83b2-b4d1526c11b9" />
+  <Project Path="Core/Core.csproj" Id="4c6ad933-b8d8-4de4-9d66-7a21eb93e995" />
+  <Project Path="Infrastructure/Infrastructure.csproj" Id="a996d0b8-192d-4130-8f58-42c19e6ea830" />
+  <Project Path="LLM/LLM.csproj" Id="013e6e58-9e9d-4416-9d45-92f17c559569" />
+  <Project Path="RAGPipeline/RAGPipeline.csproj" />
+</Solution>
