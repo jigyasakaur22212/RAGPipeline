@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LLM.Services
 {
-    public class Embedding
+    public class Embedding : IEmbedding
     {
         private IEmbeddingGenerator<string, Embedding<float>> _generator;
         public Embedding()

@@ -6,11 +6,12 @@ using LLM.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IngestionPipeline>();
-builder.Services.AddSingleton<Embedding>();
-builder.Services.AddSingleton<RouteDb>();
-builder.Services.AddSingleton<ChunkingData>();
-builder.Services.AddSingleton<CosmosDb>();
+builder.Services.AddSingleton<IIngestionPipeline, IngestionPipeline>();
+builder.Services.AddSingleton<IEmbedding, Embedding>();
+builder.Services.AddSingleton<IRouteDb, RouteDb>();
+builder.Services.AddSingleton<IChunkingData, ChunkingData>();
+builder.Services.AddSingleton<ICosmosDb, CosmosDb>();
+builder.Services.AddSingleton<IRetrivalPipeline, RetrivalPipeline>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

@@ -3,7 +3,7 @@ using Azure.Services;
 
 namespace Infrastructure.Services
 {
-    public class RouteDb
+    public class RouteDb : IRouteDb
     {
         private readonly string? _configuredDb;
         private readonly CosmosDb _db;
