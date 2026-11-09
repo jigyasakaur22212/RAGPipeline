@@ -4,7 +4,7 @@ using LLM.Services;
 
 namespace Core.Services
 {
-    public class IngestionPipeline
+    public class IngestionPipeline : IIngestionPipeline
     {
         private readonly ChunkingData _chunking;
         private readonly Embedding _embedding;

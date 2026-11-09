@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Services
 {
-    public class ChunkingData
+    public class ChunkingData : IChunkingData
     {
         private readonly int _chunkSize;
 
