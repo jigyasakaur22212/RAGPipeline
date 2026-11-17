@@ -2,6 +2,6 @@
 {
     public interface IEmbedding
     {
-        Task<float> GenerateEmbeddingAsync(string text);
+        Task<float[]> GenerateEmbeddingAsync(string text);
     }
 }

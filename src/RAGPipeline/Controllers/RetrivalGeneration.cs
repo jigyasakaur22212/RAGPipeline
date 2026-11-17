@@ -11,10 +11,11 @@ namespace RAGPipeline.Controllers
         {
             _retrivalPipeline = retrivalPipeline;
         }
-        public async Task<IActionResult> Retrival(string prompt)
+        public async Task<IActionResult> RetrivalGenerationCall(string prompt)
         {
             var relevantChunks = await _retrivalPipeline.GetRelevantChunks(prompt);
+
             return Ok(relevantChunks);
-        }
+        }       
     }
 }

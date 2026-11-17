@@ -35,7 +35,7 @@ namespace Azure.Services
         {
             await InitializeContainer();
             //semantic search query to retrieve chunks based on embedding
-            var query = new QueryDefinition("SELECT TOP 10\r\n  *\r\nFROM\r\n  container c\r\nORDER BY RANK\r\n  FULLTEXTSCORE(c.embedding, @embedding)")
+            var query = new QueryDefinition("SELECT TOP 10 *\r\nFROM c\r\nORDER BY VectorDistance(c.embedding, @embedding)")
                 .WithParameter("@embedding", embedding);
 
             var iterator = cosmosContainer.GetItemQueryIterator<Chunk>(query);

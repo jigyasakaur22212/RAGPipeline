@@ -25,5 +25,10 @@ namespace Core.Services
 
             return relevantChunks;  
         }
+        public async Task<List<Chunk>> Generation(float[] embedding)
+        {
+            var relevantChunks = await _cosmosDb.GetChunksByEmbedding(embedding);
+            return relevantChunks;
+        }
     }
 }

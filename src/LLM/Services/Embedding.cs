@@ -16,10 +16,10 @@ namespace LLM.Services
 
         }
 
-        public async Task<float> GenerateEmbeddingAsync(string text)
+        public async Task<float[]> GenerateEmbeddingAsync(string text)
         {
             var embeddings = await _generator.GenerateAsync(text);
-            return embeddings.Vector.ToArray()[0];
+            return embeddings.Vector.ToArray();
         }
     }
 }
