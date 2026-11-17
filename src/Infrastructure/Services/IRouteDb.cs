@@ -1,10 +1,9 @@
-﻿using Azure.Models;
+using Azure.Models;
 
 namespace Infrastructure.Services
 {
     public interface IRouteDb
     {
-        void RouteIngestionToConfiguredDb(Chunk chunk);
-
+        Task RouteIngestionToConfiguredDbAsync(Chunk chunk);
     }
 }

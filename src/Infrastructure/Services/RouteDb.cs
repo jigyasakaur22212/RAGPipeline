@@ -1,26 +1,20 @@
-﻿using Azure.Models;
+using Azure.Models;
 using Azure.Services;
 
 namespace Infrastructure.Services
 {
     public class RouteDb : IRouteDb
     {
-        private readonly string? _configuredDb;
-        private readonly CosmosDb _db;
+        private readonly ICosmosDb _db;
 
-        public RouteDb()
+        public RouteDb(ICosmosDb db)
         {
-            _configuredDb = Environment.GetEnvironmentVariable("ConfiguredDb");
-            _db = _configuredDb?.ToLowerInvariant() switch
-            {
-                "cosmosdb" => new CosmosDb(),
-                // "postgresql" => new PostgreSql(),
-                _ => throw new InvalidOperationException("Invalid configured database.")
-            };
+            _db = db;
         }
-        public void RouteIngestionToConfiguredDb(Chunk chunk)
+
+        public Task RouteIngestionToConfiguredDbAsync(Chunk chunk)
         {
-            _db.AddChunk(chunk);
+            return _db.AddChunk(chunk);
         }
     }
 }

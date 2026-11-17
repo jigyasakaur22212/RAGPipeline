@@ -1,4 +1,4 @@
-﻿namespace LLM.Services
+namespace LLM.Services
 {
     public interface IEmbedding
     {

@@ -1,33 +1,37 @@
-﻿using Infrastructure.Services;
 using Azure.Models;
+using Infrastructure.Services;
 using LLM.Services;
 
 namespace Core.Services
 {
     public class IngestionPipeline : IIngestionPipeline
     {
-        private readonly ChunkingData _chunking;
-        private readonly Embedding _embedding;
-        private readonly RouteDb _db;
+        private readonly IChunkingData _chunking;
+        private readonly IEmbedding _embedding;
+        private readonly IRouteDb _db;
 
-        public IngestionPipeline(Embedding embedding , RouteDb db)
+        public IngestionPipeline(IChunkingData chunking, IEmbedding embedding, IRouteDb db)
         {
-            _chunking = new ChunkingData();
+            _chunking = chunking;
             _embedding = embedding;
             _db = db;
         }
+
         public async Task IngestData(string data)
         {
-            var chunks = _chunking.ChunkData(data);
+            ArgumentException.ThrowIfNullOrWhiteSpace(data);
 
-            foreach (var chunk in chunks)
+            var chunks = _chunking.ChunkData(data);
+            for (var index = 0; index < chunks.Count; index++)
             {
+                var chunk = chunks[index];
                 var embedding = await _embedding.GenerateEmbeddingAsync(chunk);
-                _db.RouteIngestionToConfiguredDb(new Chunk
+
+                await _db.RouteIngestionToConfiguredDbAsync(new Chunk
                 {
-                    ChunkId = chunks.IndexOf(chunk).ToString(),
+                    ChunkId = index.ToString(),
                     ActualText = chunk,
-                    Embedding = new[] { embedding },
+                    Embedding = embedding,
                     CreatedOn = DateTime.UtcNow
                 });
             }
